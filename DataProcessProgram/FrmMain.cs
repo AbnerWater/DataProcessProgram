@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DeviceControl;
 using System.Threading;
+using DisplayControl;
+using Arction.WinForms.Charting;
+using System.IO.Ports;
 
 namespace DataProcessProgram
 {
@@ -64,14 +67,46 @@ namespace DataProcessProgram
             }
         }
         #endregion
+        private LightningChartUltimate _voletPlot;
+        private LightningChartUltimate _currentPlot;
         private System.Timers.Timer _sysTimer;
         private System.Timers.Timer _plotTimer;
         private RsDevice _rsDevice;
-        private TcpDevice _tcpDevice;
+        private DataSet _data;
         private bool _simulateDev = false;
         public FrmMain()
         {
             InitializeComponent();
+        }
+        private void deviceConnect(string port,string buad)
+        {
+            if(_rsDevice.Connection)
+            {
+                if (MessageBox.Show("当前已连接至仪器，是否断开并重新连接", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    _rsDevice.Disconnect();
+                    _rsDevice.Connect(port, int.Parse(buad));
+                }
+            }
+            else
+                _rsDevice.Connect(port, int.Parse(buad));
+        }
+        private void deviceDisconnect()
+        {
+            if (_rsDevice.Connection)
+                _rsDevice.Disconnect();
+        }
+        private void openDataset(string file)
+        {
+
+        }
+        private void loadData2dgv(DataSet data)
+        {
+
+        }
+        private void loadData2Plot(DataSet data)
+        {
+
         }
         private void FrmMain_Load(object sender, EventArgs e)
         {
@@ -81,7 +116,6 @@ namespace DataProcessProgram
             labelVersion.Text = string.Format(labelVersion.Text, Application.ProductVersion);
             textBoxDescription.Text = string.Format(textBoxDescription.Text, Application.ProductName);
             _rsDevice = new RsDevice(500);
-            _tcpDevice = new TcpDevice(500);
             #region iniTimer
             _sysTimer = new System.Timers.Timer(500);
             _sysTimer.AutoReset = true;
@@ -95,11 +129,48 @@ namespace DataProcessProgram
             mainTab.Appearance = TabAppearance.FlatButtons;
             mainTab.ItemSize = new Size(0, 1);
             mainTab.SizeMode = TabSizeMode.Fixed;
+            _currentPlot = PlotMethod.CreateChart(null);
+            PlotMethod.formatLcuXY(_currentPlot, "电流采集","电流(pA/V)", -5, 5);
+            tableDataRecord.Controls.Add(_currentPlot, 0, 2);
+            _voletPlot = PlotMethod.CreateChart(null);
+            PlotMethod.formatLcuXY(_voletPlot, "电压采集","电压(mV)", -1, 1);
+            tableDataRecord.Controls.Add(_voletPlot, 0, 3);
+            foreach (var v in SerialPort.GetPortNames())
+            {
+                cbxComPort.Items.Add(v);
+            }
+            mainTab.SelectedIndexChanged += MainTab_SelectedIndexChanged;
             #endregion
-
             SplasherForm.Status = "初始化完毕";
             Thread.Sleep(300);
             SplasherForm.Close();
+        }
+
+        private void MainTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var tab = sender as TabControl;
+            switch (tab.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    if(!_rsDevice.Connection&&!_simulateDev)
+                    {
+                        if(MessageBox.Show("检测到当前并未连接任何设备，是否进入模拟采集状态", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                            _simulateDev = true;
+                    }
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void _plotTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -110,23 +181,31 @@ namespace DataProcessProgram
         private void _sysTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             this.Invoke(new Action(() => {
-                if(_rsDevice.Connection||_tcpDevice.Connection)
+                if(_rsDevice.Connection)
                 {
+                    strDeviceName.Text = _rsDevice.PortName;
                     strStatus.Text = "仪器已连接";
                     strStatus.ForeColor = Color.LightGreen;
                     picStatus.Image = Properties.Resources.正常;
+                    btnConnect.BackColor = Color.LightGreen;
+                    btnConnect.Text = "断开连接";
                 }
                 else if(_simulateDev)
                 {
+                    strDeviceName.Text = "虚拟仪器";
                     strStatus.Text = "虚拟仪器连接";
                     strStatus.ForeColor = Color.LightGreen;
                     picStatus.Image = Properties.Resources.正常;
+                    btnConnect.BackColor = Color.White;
+                    btnConnect.Text = "仪器连接";
                 }
                 else
                 {
                     strStatus.Text = "仪器未连接";
                     strStatus.ForeColor = Color.Red;
                     picStatus.Image = Properties.Resources.错误;
+                    btnConnect.BackColor = Color.White;
+                    btnConnect.Text = "仪器连接";
                 }
             }));
         }
@@ -190,6 +269,58 @@ namespace DataProcessProgram
         private void btnAbout_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabAbout;
+        }
+
+        private void btnDeviceConnect_Click(object sender, EventArgs e)
+        {
+            mainTab.SelectedTab = tabDevice;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            mainTab.SelectedTab = tabData;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            mainTab.SelectedTab = tabDataPlot;
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+            if(btn.Text.Contains("仪器"))
+            {
+                deviceConnect(cbxComPort.SelectedItem.ToString(), cbxPortBuad.SelectedItem.ToString());
+            }
+            else
+            {
+                deviceDisconnect();
+            }
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Multiselect = false;
+            ofd.Filter = "(数据文件)|*.xml|*.txt|*.csv";
+            if(ofd.ShowDialog()==DialogResult.OK)
+            {
+                try
+                {
+                    DataSet data = new DataSet(ofd.FileName);
+                    if (data != null)
+                    {
+                        strDataFile.Text = data.DataSetName;
+                        loadData2dgv(data);
+                        loadData2Plot(data);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("打开数据文件出错，请检查数据文件格式后重试！");
+                }
+            }
         }
     }
 }

@@ -39,6 +39,17 @@ namespace DeviceControl
         {
 
         }
+        public bool Disconnect()
+        {
+            if (_port.IsOpen)
+            {
+                _port.DataReceived -= _port_DataReceived;
+                _port.Close();
+                return true;
+            }
+            else
+                return false;
+        }
         public bool Reconnect()
         {
             if (_port.IsOpen)
@@ -152,6 +163,7 @@ namespace DeviceControl
         protected Thread _thrRecv;
         protected IPEndPoint _local;
         protected IPEndPoint _remote;
+        public string IpAdd { get { return _remote.ToString(); } }
         public bool Connection
         {
             get
