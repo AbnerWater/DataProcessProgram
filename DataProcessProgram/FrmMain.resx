@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnMinimal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAARNJREFUWEft
+        llERgzAQRJGABCQgoRKQgAQctFIqoRLqoBIqhe4mF6akkPBx2y/ezA3lQnZ3IJQ0J/9knucWdUV11vID
+        or2Jt9ZawT7qhSIPa/sB0WfUDiarEDy3fmKwIT8gmgKQJQSPdp4YwwRvIPwdgNC0s2NCY04gngfI0ZkT
+        GJQCTHaZDpiUAixrQgYMao9AGwLitQBEFwLCRwKQu03xBcJT1K9ysykn++A28R/sHW5YGV7jv6ggyi/b
+        US42zRcIj1G/iiYAgfiRELoABAa1EPIA/J6XFqT0EeSbiS1ki/BnJ2OV4x8AorvbKP6OrQVJgE3zBHtx
+        KNBb2wcKRt3A7jYKYwNKs9OhMUr7ep2cBJrmA1e8NxSvBlF2AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnMaxminal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAATNJREFUWEft
+        lusRgjAQhCmBEuxES6AEO5ES7MAStAPtQDvQDrAD3IUNBBEmCfExI9/M/mC9O3YU4iUzLpRluYDOUAwK
+        aK3RbqBhW7XGo9BoN9CQ130Nd+jkoQvUQaPdQL0d4CDbC/RldXuNbDdQbwdYyfYGvbd6xPcC8OeokNUC
+        L4U2AzpChh30quZZmUY3wBsNYN8kFp0QuB4N8A5yja/AtXOAA7QK0BriK2oICsABqWxv0MsQhqAAJ1lB
+        oJ/fhGEOMAf4uQDcBSpktcgnMQPw2F5KexoGlbfIJzEDDKLyFvnkEwH699AHJGYA/v/zwbPF9a5/0sI0
+        xAzQeQhHUQP5eoCzrCDQPzkA6W0zLqCPW5W92AQHIFeIw3zUHDTCK4C9SMTCK8DzNjMVvnLBi82/kCQP
+        puACYE5Fb6kAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnClose.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAVhJREFUWEft
+        ltFtw0AMQz1CN05G6AbNJh2hIyQbtBu4YijFTX20pbP9U/QBBxQniiSQIL3hn2Acxxc7Jzuffk4+2kTa
+        1wavdn7z5uNu4EGrJ84+nrBLtGvRXQK7tJhxdcmEXX5x1qRcAjtcbXJz2YRdnjmTpEtAyxXJ/CMANrhw
+        LlktAQ2lkotL20BAnUSWwIwSyXJ4ACH1klkJ3HEkyYUHWOCe5FECf/NKUgsPsMh9CYKPCQ9gQJ8utoUH
+        MKJfiX3CAxjSN8W+4QGM6b/IYeH4r/Z+j1gm/YuZxkwR/nG3z7FfCTOrhgfbS5hJb3jQX8KWM+H4Uq59
+        MeslbCkV7nLo9yth4lJ4gDuOJOslTNQVHmBGiUSXsOGm8AAaSiXtEjZovYp/kv6Fg5YrktKrGKTDA+xw
+        tUnpVVwOD7BLixnpV3F3eAAPWj0hX8UocfPTFnVwlO9fYBi+ASQziNJwdQcSAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="frmLogo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAuxJREFUaEPt
+        mD1oFEEUxxd25y7czl5IwMJKiyB6IrmZiQQbEURUBAtFFGwURERQtPCjEYRgK3YWfoFY2igoGgjpxMIP
+        BAMGbW1UsEqt/7l7ezt3O7e3525ghfnBI2Hef968mZudN7uew+FwOByOMQhCsTeI5G38feGH8lHA5U1y
+        VR+dLOxP2sQySSpMQ21Est/TyXeNRfI0KauJz8UJW+KGfSBpNQkicd2StGlrJK0mLFJnLEknFsq3JK0m
+        rDEnrIknVv5ppI88/XBhda74XB7xptQkuf4JPAf3LImvz+r7XB2zDPbFb6pDJBkb9F9JYonl5H/5iSQl
+        0dw1jaA/jQFMe0eqscAqHzDj1KPZLQFXN3ptkbxK0uIg4JCC0zU/EodJmhus+KIRY4ma9Vhv4vZ6U85Q
+        czEQLHMCLJSXSJqLGp/d3hcjnNtHLo+F7XbiK6kiI1j2L9AQB0maC9x5Hib91So190CNuBb7GRcXqLkA
+        Gc8ATqOvpMrHhhY3++t6QJ4+MLGPsaaUraQfOiT7zRw8NqzSOZKNBIktGH2HVttapLb2dJF8ybg6X+TE
+        6zI938RE9us9j8kcNxLJvY2gXUv6qQVqtgKNZeuqRW+ivZkkxcCqXDSDs6aaJ5eVweuD3k7kSjGk7pBh
+        El6rRtJiIOAtM7g+YciVAgOvxjr9IFOzFfgfmHEHDf6TJC2OH6r7RvBf3oTYRK4e+qg0NJkT1QxUZpuV
+        e1dCwGdG8Pf65CJXB7QtJX6BLZANttDdRJ+2Un+BDpM7phC4V0Vhr+J92r0mGAngROv0yYA1xFxfnz5T
+        nz1vpk7S8qhxuU3XBWOwp9293LcdVkg+EmitBbTGRYsk5YNkd2OQ34ODxsa4fELSXLBGeyeO7cu0CHcC
+        3t5DrvUD9/yjg4mbVv7+LRkkeMqWeGx4KXpM0moy+oW94t99Rn8yqfqHq//9o5UGiQ57h3hNkuqjv2LQ
+        NeMHitdzHKFnyeVwOBwOhyON5/0FOyaYsSg2r6EAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="textBoxDescription.Text" xml:space="preserve">
+    <value>许可协议
+
+　　《{0:s}》是一款由西安交通大学数字化设计与制造研究组开发的商用软件，未经作者书面认可，任何人不得作任何修改。违者作者将追究其最大责任。 
+
+　　请仔细阅读以下使用许可，如果您不同意以下任何一点，请立即停止使用此软件:
+
+    1.本软件产品的版权归西安交通大学数字化设计与制造研究组所有，受到适用版权法及其他知识产权法及条约的保护。 
+   
+    2.软件作者西安交通大学数字化设计与制造研究组授予您对此版本的最终用户使用许可权。 
+   
+    3.担保责任：使用本软件产品是您在充分了解本软件特性基础上进行的，故由您自已承担使用本软件可能造成的风险。在适用法律所许可的最大范围内，作者不承认任何明示或默示的担保或条件。 
+   
+    4.无赔偿责任：使用本软件产品是您在充分了解本软件特性基础上进行的，故由您自已承担使用本软件可能造成的损失。在适用法律所许可的最大范围内，作者不承担使用此软件版本所造成的任何损失。
+   
+    5.您不能对此软件作任何的软件反向工程，如反汇编，跟踪等。 
+
+    您一旦传播、安装、复制或以其它方式使用本软件，即表示您同意接受以上各项条件的约束。如您不同意以上条件的约束，请不要传播、安装或使用该软件。
+
+  
+    西安交通大学数字化设计与制造研究组
+    网址：http://www.ddml-xjtu.com/ 
+    联系地址：陕西省西安市雁塔区雁翔路99号西安交通大学智能制造创新中心-南一楼b座   
+    Email: abnerwater@outlook.com
+
+    
+                                                                                                                   
+                                                                                                                        2022-12-31</value>
+  </data>
+</root>

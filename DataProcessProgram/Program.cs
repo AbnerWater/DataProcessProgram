@@ -16,7 +16,18 @@ namespace DataProcessProgram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            SplasherForm.Show(typeof(Splasher));
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            Application.Run(new FrmMain());
+        }
+        private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs ex)
+        {
+
+            string message = string.Format("操作发生错误，您需要退出系统么？\r\n{0}", ex.Exception.StackTrace);
+            if (DialogResult.Yes == MessageBox.Show(message, "系统错误", MessageBoxButtons.YesNo))
+            {
+                Application.Exit();
+            }
         }
     }
 }
