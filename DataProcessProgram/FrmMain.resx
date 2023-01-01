@@ -117,41 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="Help.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="textBoxDescription.Text" xml:space="preserve">
-    <value>许可协议
-
-　　《{0:s}》是一款由西安交通大学数字化设计与制造研究组开发的商用软件，未经作者书面认可，任何人不得作任何修改。违者作者将追究其最大责任。 
-
-　　请仔细阅读以下使用许可，如果您不同意以下任何一点，请立即停止使用此软件:
-
-    1.本软件产品的版权归西安交通大学数字化设计与制造研究组所有，受到适用版权法及其他知识产权法及条约的保护。 
-   
-    2.软件作者西安交通大学数字化设计与制造研究组授予您对此版本的最终用户使用许可权。 
-   
-    3.担保责任：使用本软件产品是您在充分了解本软件特性基础上进行的，故由您自已承担使用本软件可能造成的风险。在适用法律所许可的最大范围内，作者不承认任何明示或默示的担保或条件。 
-   
-    4.无赔偿责任：使用本软件产品是您在充分了解本软件特性基础上进行的，故由您自已承担使用本软件可能造成的损失。在适用法律所许可的最大范围内，作者不承担使用此软件版本所造成的任何损失。
-   
-    5.您不能对此软件作任何的软件反向工程，如反汇编，跟踪等。 
-
-    您一旦传播、安装、复制或以其它方式使用本软件，即表示您同意接受以上各项条件的约束。如您不同意以上条件的约束，请不要传播、安装或使用该软件。
-
-  
-    西安交通大学数字化设计与制造研究组
-    网址：http://www.ddml-xjtu.com/ 
-    联系地址：陕西省西安市雁塔区雁翔路99号西安交通大学智能制造创新中心-南一楼b座   
-    Email: abnerwater@outlook.com
-
-    
-                                                                                                                   
-                                                                                                                        2022-12-31</value>
-  </data>
-  <metadata name="Help.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnMinimal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -202,5 +167,63 @@
         3t5DrvUD9/yjg4mbVv7+LRkkeMqWeGx4KXpM0moy+oW94t99Rn8yqfqHq//9o5UGiQ57h3hNkuqjv2LQ
         NeMHitdzHKFnyeVwOBwOhyON5/0FOyaYsSg2r6EAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="btnRefresh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAArdJREFUWEft
+        VzuI1UAUfY1oIRaCot3Ky0wmb7GQbGZ21+YhiKylIgiCFmqjCFZaWLggdiKibKOw2/ip/IJgIcgWLouI
+        jdv571QQEQRLPTe5720+k7wkm3QeOLzMzP2c3My7mXSqYHx8arOUEzOuGxxRQp+RUs/SmObZpB1IaQ67
+        Uj8C/+bS1UskynHMJnZbO5QIDiD4y0yyYn6kynCIesBd9HBHdyzBy1Po27UeDSXHHaxYg8rgOzgXPXs9
+        S9cQ+gRrf7K2EYWYNBx6COVM9PkyiYLkKKs57Tgz69k0Ac8zIhKU8QtJa2QHsYeU1IuuCF6EjnFQubC4
+        nHU2VzzP385mhYDtfvi8T8cgKmluDsc2AXBeiDsQofwEL1dCUTVCpgU4zq4t2DTP4kYIcoOXa0HK4F48
+        XoK2ChDgdAoGv3INSkCpYBri72aSxlkUn3YoVYSHlYDEF60J01zDDY4ERFxGkt+ZpHG2KYCg1NROJLqV
+        STxg2wIGUErvc4V5XCgAE69gdKnX62/kqcaB/nIs0WMSAjCIJvVb6nY83QrQCc+DX+wCVvlcCXOQlxtH
+        rxdso38LD60CQob/ZXdyN5u1hzwBQwpzDWXbwebNY6SAiN/oTcYuzaKUANfM06uaXSohau/BXG53HSHg
+        oSfMXjatDGrrg1jYUyvWg8ioCtQ98YZvWKk/p+J9QkUCNomQEvAzdj0knE6yeSngGOahr9BRLRkLx3k2
+        WcVAAE4s96ncuP6QcGKikz1wHL/LblaMjfU3IPEFlDtzI5izn5TpJITFozwMgSCv0wGIEPEVvEr9IX5M
+        63ant2KjnkWcNza/3ORFoI8MW7CqrJV8APrsQoB3tsAl+BS9Yw+Hqg/q3Qh0DkJyvhWSxCNahP1xdm8O
+        vu+vo24Y7QG9xAl/UIUwt4zf67aPkP8oRqfzD+uDGVQEhA1WAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="Help.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="btnClean.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAMRJREFUWEft
+        lgEKwyAMRT3ajtab7RK7T+vfCIS/Wn+0rpT54EO1SYwVP02TBpasZ9ZKwhzeDeeVxYub8G44ttjjPfqA
+        Z5sfTmmh2cBsYDZwWgMlp2MxezFeslMeOZ0XsxfDkpzSgr3T9RJySjkwyP0auOwIlBvQKtSugqui3oSI
+        UDP0w2KJvTTXuW0DOGd/1j9vgPNa68iJtR2rdb5QEzmuNpYpJUZ3zGMZS2RH5IJH45ADMtilJffKfzGZ
+        sxwx7ID/REobG9jwOYYAGAYAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="textBoxDescription.Text" xml:space="preserve">
+    <value>许可协议
+
+　　《{0:s}》是一款由西安交通大学数字化设计与制造研究组开发的商用软件，未经作者书面认可，任何人不得作任何修改。违者作者将追究其最大责任。 
+
+　　请仔细阅读以下使用许可，如果您不同意以下任何一点，请立即停止使用此软件:
+
+    1.本软件产品的版权归西安交通大学数字化设计与制造研究组所有，受到适用版权法及其他知识产权法及条约的保护。 
+   
+    2.软件作者西安交通大学数字化设计与制造研究组授予您对此版本的最终用户使用许可权。 
+   
+    3.担保责任：使用本软件产品是您在充分了解本软件特性基础上进行的，故由您自已承担使用本软件可能造成的风险。在适用法律所许可的最大范围内，作者不承认任何明示或默示的担保或条件。 
+   
+    4.无赔偿责任：使用本软件产品是您在充分了解本软件特性基础上进行的，故由您自已承担使用本软件可能造成的损失。在适用法律所许可的最大范围内，作者不承担使用此软件版本所造成的任何损失。
+   
+    5.您不能对此软件作任何的软件反向工程，如反汇编，跟踪等。 
+
+    您一旦传播、安装、复制或以其它方式使用本软件，即表示您同意接受以上各项条件的约束。如您不同意以上条件的约束，请不要传播、安装或使用该软件。
+
+  
+    西安交通大学数字化设计与制造研究组
+    网址：http://www.ddml-xjtu.com/ 
+    联系地址：陕西省西安市雁塔区雁翔路99号西安交通大学智能制造创新中心-南一楼b座   
+    Email: abnerwater@outlook.com
+
+    
+                                                                                                                   
+                                                                                                                        2022-12-31</value>
   </data>
 </root>

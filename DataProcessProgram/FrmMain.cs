@@ -13,6 +13,7 @@ using System.Threading;
 using DisplayControl;
 using Arction.WinForms.Charting;
 using System.IO.Ports;
+using DataSet = DataControl.DataSet;
 
 namespace DataProcessProgram
 {
@@ -69,10 +70,14 @@ namespace DataProcessProgram
         #endregion
         private LightningChartUltimate _voletPlot;
         private LightningChartUltimate _currentPlot;
+        private LightningChartUltimate _displayPlot;
         private System.Timers.Timer _sysTimer;
         private System.Timers.Timer _plotTimer;
+        private System.Timers.Timer _recTimer;
         private RsDevice _rsDevice;
         private DataSet _data;
+        private bool _preview = false;
+        private bool _record = false;
         private bool _simulateDev = false;
         public FrmMain()
         {
@@ -102,11 +107,31 @@ namespace DataProcessProgram
         }
         private void loadData2dgv(DataSet data)
         {
-
+            formateDgv();
+            for (int i = 0; i < data.TimeList.Count; i++)
+            {
+                dgvDataView.Rows.Add();
+                dgvDataView.Rows[i].HeaderCell.Value = i + 1;
+                dgvDataView.Rows[i].Cells[0].Value = data.TimeList[i].ToString("yyyy-MM-dd HH:mm:ss.fff");
+                dgvDataView.Rows[i].Cells[1].Value = data.Signal_I[i].ToString("f5");
+                dgvDataView.Rows[i].Cells[2].Value = data.Signal_V[i].ToString("f5");
+            }
         }
         private void loadData2Plot(DataSet data)
         {
-
+            PlotMethod.AddLineXY(_displayPlot, data.TimeList, data.Signal_I, "电流信号", Color.Blue);
+            PlotMethod.AddLineXY(_displayPlot, data.TimeList, data.Signal_V, "电压信号", Color.Red);
+        }
+        private void formateDgv()
+        {
+            dgvDataView.Rows.Clear();
+            dgvDataView.Columns.Clear();
+            dgvDataView.Columns.Add("time", "采集时间");
+            dgvDataView.Columns.Add("signal_i", "电流信号");
+            dgvDataView.Columns.Add("signal_v", "电压信号");
+            dgvDataView.Columns[0].Width = 200;
+            dgvDataView.Columns[1].Width = 100;
+            dgvDataView.Columns[2].Width = 100;
         }
         private void FrmMain_Load(object sender, EventArgs e)
         {
@@ -115,15 +140,20 @@ namespace DataProcessProgram
             lblProductName.Text = Application.ProductName;
             labelVersion.Text = string.Format(labelVersion.Text, Application.ProductVersion);
             textBoxDescription.Text = string.Format(textBoxDescription.Text, Application.ProductName);
-            _rsDevice = new RsDevice(500);
+            _rsDevice = new RsDevice(50);
             #region iniTimer
             _sysTimer = new System.Timers.Timer(500);
             _sysTimer.AutoReset = true;
             _sysTimer.Elapsed += _sysTimer_Elapsed;
             _sysTimer.Start();
-            _plotTimer = new System.Timers.Timer(100);
+            _plotTimer = new System.Timers.Timer(50);
             _plotTimer.AutoReset = true;
             _plotTimer.Elapsed += _plotTimer_Elapsed;
+            _plotTimer.Start();
+            _recTimer = new System.Timers.Timer(50);
+            _recTimer.AutoReset = true;
+            _recTimer.Elapsed += _recTimer_Elapsed;
+            _recTimer.Start();
             #endregion
             #region GUI
             mainTab.Appearance = TabAppearance.FlatButtons;
@@ -131,21 +161,45 @@ namespace DataProcessProgram
             mainTab.SizeMode = TabSizeMode.Fixed;
             _currentPlot = PlotMethod.CreateChart(null);
             PlotMethod.formatLcuXY(_currentPlot, "电流采集","电流(pA/V)", -5, 5);
+            PlotMethod.addDefaultLine(_currentPlot);
             tableDataRecord.Controls.Add(_currentPlot, 0, 2);
             _voletPlot = PlotMethod.CreateChart(null);
             PlotMethod.formatLcuXY(_voletPlot, "电压采集","电压(mV)", -1, 1);
+            PlotMethod.addDefaultLine(_voletPlot);
             tableDataRecord.Controls.Add(_voletPlot, 0, 3);
+            _displayPlot = PlotMethod.CreateChart(tabPlotView);
+            PlotMethod.formatLcuXY(_displayPlot, "", "", -5, 5);
+            formateDgv();
             foreach (var v in SerialPort.GetPortNames())
             {
                 cbxComPort.Items.Add(v);
             }
             mainTab.SelectedIndexChanged += MainTab_SelectedIndexChanged;
+            btnStop.Enabled = false;
+            btnSave.Enabled = false;
             #endregion
+            _data = new DataSet();
             SplasherForm.Status = "初始化完毕";
             Thread.Sleep(300);
             SplasherForm.Close();
         }
 
+        private void _recTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (!_record)
+                return;
+            _data.AddData(DateTime.Now, _rsDevice.Data[0], _rsDevice.Data[1]);
+        }
+        private void _plotTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (!_preview)
+                return;
+            this.BeginInvoke(new Action(() =>
+            {
+                PlotMethod.trackPlot(_currentPlot, DateTime.Now, _rsDevice.Data[0], 0);
+                PlotMethod.trackPlot(_voletPlot, DateTime.Now, _rsDevice.Data[1], 0);
+            }));
+        }
         private void MainTab_SelectedIndexChanged(object sender, EventArgs e)
         {
             var tab = sender as TabControl;
@@ -158,8 +212,11 @@ namespace DataProcessProgram
                 case 2:
                     if(!_rsDevice.Connection&&!_simulateDev)
                     {
-                        if(MessageBox.Show("检测到当前并未连接任何设备，是否进入模拟采集状态", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                        if (MessageBox.Show("检测到当前并未连接任何设备，是否进入模拟采集状态", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                        {
                             _simulateDev = true;
+                            _rsDevice.SetVirtual(true);
+                        }
                     }
                     break;
                 case 3:
@@ -172,12 +229,6 @@ namespace DataProcessProgram
                     break;
             }
         }
-
-        private void _plotTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            
-        }
-
         private void _sysTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             this.Invoke(new Action(() => {
@@ -207,6 +258,15 @@ namespace DataProcessProgram
                     btnConnect.BackColor = Color.White;
                     btnConnect.Text = "仪器连接";
                 }
+                if (_data.TimeList.Count > 0 && !_record)
+                    btnSave.Enabled = true;
+                else
+                    btnSave.Enabled = false;
+                btnStop.Enabled = _record || _preview;
+                if (_record)
+                    strRecordStatus.Text = "正在记录数据...";
+                else
+                    strRecordStatus.Text = "";
             }));
         }
 
@@ -289,9 +349,12 @@ namespace DataProcessProgram
         private void btnConnect_Click(object sender, EventArgs e)
         {
             var btn = sender as Button;
-            if(btn.Text.Contains("仪器"))
+            if(btn.Text=="仪器连接")
             {
-                deviceConnect(cbxComPort.SelectedItem.ToString(), cbxPortBuad.SelectedItem.ToString());
+                if (cbxComPort.SelectedIndex > -1 && cbxPortBuad.SelectedIndex > -1)
+                    deviceConnect(cbxComPort.SelectedItem.ToString(), cbxPortBuad.SelectedItem.ToString());
+                else
+                    MessageBox.Show("请检查仪器连接参数后重试");
             }
             else
             {
@@ -303,24 +366,80 @@ namespace DataProcessProgram
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Multiselect = false;
-            ofd.Filter = "(数据文件)|*.xml|*.txt|*.csv";
+            ofd.Filter = "XML文件|*.xml|文本文件|*.txt|逗号分隔文件|*.csv";
             if(ofd.ShowDialog()==DialogResult.OK)
             {
-                try
+                DataSet data = new DataSet();
+                if (data.LoadFromFile(ofd.FileName))
                 {
-                    DataSet data = new DataSet(ofd.FileName);
-                    if (data != null)
-                    {
-                        strDataFile.Text = data.DataSetName;
-                        loadData2dgv(data);
-                        loadData2Plot(data);
-                    }
+                    strDataFile.Text = data.Name;
+                    loadData2dgv(data);
+                    loadData2Plot(data);
                 }
-                catch (Exception ex)
-                {
+                else
                     MessageBox.Show("打开数据文件出错，请检查数据文件格式后重试！");
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            cbxComPort.Items.Clear();
+            foreach (var v in SerialPort.GetPortNames())
+            {
+                cbxComPort.Items.Add(v);
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "XML文件|*.xml|文本文件|*.txt|逗号分隔文件|*.csv";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                _data.Saved = _data.SaveToFile(sfd.FileName);
+                if (_data.Saved)
+                    MessageBox.Show("数据文件成功保存至"+sfd.FileName);
+                else
+                    MessageBox.Show("保存数据文件失败，请重新采集后再试");
+            }
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            if(!_preview)
+            {
+                PlotMethod.formatLcuXY(_currentPlot, "电流采集", "电流(pA/V)", -5, 5);
+                PlotMethod.formatLcuXY(_voletPlot, "电压采集", "电压(mV)", -1, 1);
+            }
+            _preview = !_preview;
+        }
+
+        private void btnRecord_Click(object sender, EventArgs e)
+        {
+            if (_data.TimeList.Count > 0 && !_data.Saved)
+            {
+                if (MessageBox.Show("再次记录会覆盖未保存的数据，是否继续？", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                {
+                    _data.ClearData();
+                    _data.Saved = false;
                 }
             }
+            _record = true;
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            if (_record)
+                _record = !_record;
+            if (_preview)
+                _preview = !_preview;
+        }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            strDataFile.Text = "---";
+            PlotMethod.ClearLines(_displayPlot);
+            formateDgv();
         }
     }
 }

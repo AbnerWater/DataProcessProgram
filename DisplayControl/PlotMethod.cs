@@ -49,7 +49,7 @@ namespace DisplayControl
             xAxis.Title.Text = "时间";
             xAxis.Title.Visible = false;
             xAxis.AutoFormatLabels = false;
-            xAxis.LabelsTimeFormat = "HH:mm.ss";
+            xAxis.LabelsTimeFormat = "HH:mm:ss.fff";
             xAxis.LabelsAngle = 90;
             xAxis.LabelsFont = new Font(FontFamily.GenericSansSerif, 2, FontStyle.Regular);
             xAxis.ScrollMode = XAxisScrollMode.Scrolling;
@@ -57,7 +57,7 @@ namespace DisplayControl
             //Convert DateTime values to axis values
             DateTime now = DateTime.Now;
             double minX = xAxis.DateTimeToAxisValue(now);
-            double maxX = xAxis.DateTimeToAxisValue(now) + 360;
+            double maxX = xAxis.DateTimeToAxisValue(now) + 60;
             xAxis.SetRange(minX, maxX);
 
             //Configure y-axis
@@ -71,6 +71,16 @@ namespace DisplayControl
             lcu.ViewXY.LegendBoxes[0].Layout = LegendBoxLayout.Vertical;
             lcu.ViewXY.LegendBoxes[0].Position = LegendBoxPositionXY.TopRight;
             //Allow chart rendering
+            lcu.EndUpdate();
+        }
+        public static void addDefaultLine(LightningChartUltimate lcu,string tilte="")
+        {
+            lcu.BeginUpdate();
+            PointLineSeries series = new PointLineSeries(lcu.ViewXY, lcu.ViewXY.XAxes[0], lcu.ViewXY.YAxes[0]);
+            series.ShowInLegendBox = true;
+            series.Title.Text = "当前角度";
+            series.LineStyle.Color = Color.Blue;
+            lcu.ViewXY.PointLineSeries.Add(series);
             lcu.EndUpdate();
         }
         public static void formatLcuAxis(LightningChartUltimate lcu, DateTime xmax)
@@ -94,14 +104,42 @@ namespace DisplayControl
             lcu.ViewXY.PointLineSeries[lineIndex].AddPoints(points, false);
             lcu.EndUpdate();
         }
-        public static void trackPlot(LightningChartUltimate lcu, DateTime time, double angle, int lineIndex)
+        public static void trackPlot(LightningChartUltimate lcu, DateTime time, double value, int lineIndex)
         {
             lcu.BeginUpdate();
             SeriesPoint[] points = new SeriesPoint[1];
             points[0].X = lcu.ViewXY.XAxes[0].DateTimeToAxisValue(time);
-            points[0].Y = angle;
+            points[0].Y = value;
             lcu.ViewXY.PointLineSeries[lineIndex].AddPoints(points, false);
             lcu.ViewXY.XAxes[0].ScrollPosition = points[0].X;
+            lcu.EndUpdate();
+        }
+        public static void AddLineXY(LightningChartUltimate lcu,List<DateTime> time,List<double> value,string name,Color col)
+        {
+            lcu.BeginUpdate();
+            PointLineSeries ls = new PointLineSeries(lcu.ViewXY, lcu.ViewXY.XAxes[0], lcu.ViewXY.YAxes[0]);
+            ls.PointsVisible = false;
+            ls.LineVisible = true;
+            SeriesPoint[] points = new SeriesPoint[time.Count];
+            for (int i = 0; i < points.Length; i++)
+            {
+                points[i].X= lcu.ViewXY.XAxes[0].DateTimeToAxisValue(time[i]);
+                points[i].Y = value[i];
+            }
+            ls.Points = points;
+            ls.InvalidateData();
+            ls.Title.Text = name;
+            ls.LineStyle.Color = col;
+            ls.ShowInLegendBox = true;
+            lcu.ViewXY.PointLineSeries.Add(ls);
+            lcu.ViewXY.LegendBoxes[0].Visible = true;
+            lcu.ViewXY.ZoomToFit();
+            lcu.EndUpdate();
+        }
+        public static void ClearLines(LightningChartUltimate lcu)
+        {
+            lcu.BeginUpdate();
+            lcu.ViewXY.PointLineSeries.Clear();
             lcu.EndUpdate();
         }
         public static void clearPlot(LightningChartUltimate lcu)

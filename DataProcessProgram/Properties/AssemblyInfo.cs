@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("纳米孔测序软件")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Demo")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("西安交通大学")]
 [assembly: AssemblyProduct("纳米孔测序软件")]
-[assembly: AssemblyCopyright("Copyright ©  2022")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyTrademark("XJTU")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型

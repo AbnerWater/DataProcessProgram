@@ -43,6 +43,12 @@
     <Compile Include="DataSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UtilControl\UtilControl.csproj">
+      <Project>{a5856b7e-6057-45d0-b3da-4fc598434b7f}</Project>
+      <Name>UtilControl</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
