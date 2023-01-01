@@ -1011,6 +1011,7 @@ namespace DataProcessProgram
             this.Controls.Add(this.frmStatus);
             this.Controls.Add(this.frmTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMain";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FrmMain_Load);
