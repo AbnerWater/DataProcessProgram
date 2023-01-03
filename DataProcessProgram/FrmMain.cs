@@ -182,8 +182,29 @@ namespace DataProcessProgram
             SplasherForm.Status = "初始化完毕";
             Thread.Sleep(300);
             SplasherForm.Close();
+            this.FormClosing += FrmMain_FormClosing;
         }
-
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(_sysTimer!=null)
+            {
+                _sysTimer.Stop();
+                _sysTimer.Close();
+                _sysTimer = null;
+            }
+            if (_recTimer != null)
+            {
+                _recTimer.Stop();
+                _recTimer.Close();
+                _recTimer = null;
+            }
+            if (_plotTimer != null)
+            {
+                _plotTimer.Stop();
+                _plotTimer.Close();
+                _plotTimer = null;
+            }
+        }
         private void _recTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (!_record)
@@ -269,13 +290,11 @@ namespace DataProcessProgram
                     strRecordStatus.Text = "";
             }));
         }
-
         private void FrmMain_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
         }
-
         private void frmTitle_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
@@ -290,7 +309,6 @@ namespace DataProcessProgram
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
         private void btnMaxminal_Click(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Maximized)
@@ -300,52 +318,42 @@ namespace DataProcessProgram
             else
                 this.WindowState = FormWindowState.Normal;
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabWelcome;
         }
-
         private void btnDevice_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabDevice;
         }
-
         private void btnData_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabData;
         }
-
         private void btnDisplay_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabDataPlot;
         }
-
         private void btnAbout_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabAbout;
         }
-
         private void btnDeviceConnect_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabDevice;
         }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabData;
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabDataPlot;
         }
-
         private void btnConnect_Click(object sender, EventArgs e)
         {
             var btn = sender as Button;
@@ -361,12 +369,11 @@ namespace DataProcessProgram
                 deviceDisconnect();
             }
         }
-
         private void btnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Multiselect = false;
-            ofd.Filter = "XML文件|*.xml|文本文件|*.txt|逗号分隔文件|*.csv";
+            ofd.Filter = "XML文件|*.xml|文本文件|*.txt|表格文件|*.csv";
             if(ofd.ShowDialog()==DialogResult.OK)
             {
                 DataSet data = new DataSet();
@@ -380,7 +387,6 @@ namespace DataProcessProgram
                     MessageBox.Show("打开数据文件出错，请检查数据文件格式后重试！");
             }
         }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             cbxComPort.Items.Clear();
@@ -389,11 +395,10 @@ namespace DataProcessProgram
                 cbxComPort.Items.Add(v);
             }
         }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "XML文件|*.xml|文本文件|*.txt|逗号分隔文件|*.csv";
+            sfd.Filter = "XML文件|*.xml|文本文件|*.txt|表格文件|*.csv";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 _data.Saved = _data.SaveToFile(sfd.FileName);
@@ -403,7 +408,6 @@ namespace DataProcessProgram
                     MessageBox.Show("保存数据文件失败，请重新采集后再试");
             }
         }
-
         private void btnPreview_Click(object sender, EventArgs e)
         {
             if(!_preview)
@@ -413,7 +417,6 @@ namespace DataProcessProgram
             }
             _preview = !_preview;
         }
-
         private void btnRecord_Click(object sender, EventArgs e)
         {
             if (_data.TimeList.Count > 0 && !_data.Saved)
@@ -426,7 +429,6 @@ namespace DataProcessProgram
             }
             _record = true;
         }
-
         private void btnStop_Click(object sender, EventArgs e)
         {
             if (_record)
@@ -434,7 +436,6 @@ namespace DataProcessProgram
             if (_preview)
                 _preview = !_preview;
         }
-
         private void btnClean_Click(object sender, EventArgs e)
         {
             strDataFile.Text = "---";

@@ -63,7 +63,7 @@ namespace DataControl
                             {
                                 try
                                 {
-                                    string[] strtmp = temp.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                    string[] strtmp = temp.Split(new char[] { ' ', ',' ,'"'}, StringSplitOptions.RemoveEmptyEntries);
                                     string[] date = strtmp[0].Split('-');
                                     string[] time = strtmp[1].Split(new char[] { ':', '.' });
                                     TimeList.Add(new DateTime(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2]),
