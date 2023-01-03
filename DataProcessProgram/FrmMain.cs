@@ -136,6 +136,7 @@ namespace DataProcessProgram
         private void FrmMain_Load(object sender, EventArgs e)
         {
             SplasherForm.Status = "界面初始化......";
+            this.Text= Application.ProductName;
             strProgram.Text = Application.ProductName;
             lblProductName.Text = Application.ProductName;
             labelVersion.Text = string.Format(labelVersion.Text, Application.ProductVersion);
