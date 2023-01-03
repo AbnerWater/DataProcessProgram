@@ -30,49 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Arction.DirectX, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Third\Lc\Arction.DirectX.dll</HintPath>
-    </Reference>
-    <Reference Include="Arction.DirectXFiles, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Third\Lc\Arction.DirectXFiles.dll</HintPath>
-    </Reference>
-    <Reference Include="Arction.DirectXInit, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Third\Lc\Arction.DirectXInit.dll</HintPath>
-    </Reference>
     <Reference Include="Arction.Licensing, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Third\Lc\Arction.Licensing.dll</HintPath>
     </Reference>
-    <Reference Include="Arction.MathCore, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Third\Lc\Arction.MathCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Arction.RenderingDefinitions, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Third\Lc\Arction.RenderingDefinitions.dll</HintPath>
-    </Reference>
-    <Reference Include="Arction.RenderingEngine, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Third\Lc\Arction.RenderingEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="Arction.RenderingEngine11, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Third\Lc\Arction.RenderingEngine11.dll</HintPath>
-    </Reference>
-    <Reference Include="Arction.RenderingEngine9, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Third\Lc\Arction.RenderingEngine9.dll</HintPath>
-    </Reference>
     <Reference Include="Arction.WinForms.Charting.LightningChartUltimate, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Third\Lc\Arction.WinForms.Charting.LightningChartUltimate.dll</HintPath>
-    </Reference>
-    <Reference Include="Arction.WinForms.SignalProcessing.SignalTools, Version=8.3.1.4001, Culture=neutral, PublicKeyToken=6484d7bb14b95dd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Third\Lc\Arction.WinForms.SignalProcessing.SignalTools.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
