@@ -70,6 +70,7 @@ namespace DataProcessProgram
             this.btnRecord = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.strRecordStatus = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.strDeviceName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -80,10 +81,7 @@ namespace DataProcessProgram
             this.strDataFile = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnClean = new System.Windows.Forms.Button();
-            this.tabView = new System.Windows.Forms.TabControl();
-            this.tabPlotView = new System.Windows.Forms.TabPage();
-            this.tabGridView = new System.Windows.Forms.TabPage();
-            this.dgvDataView = new System.Windows.Forms.DataGridView();
+            this.dataViewContainer = new System.Windows.Forms.SplitContainer();
             this.tabAbout = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.lblProductName = new System.Windows.Forms.Label();
@@ -91,7 +89,6 @@ namespace DataProcessProgram
             this.labelCopyright = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.Help = new System.Windows.Forms.ToolTip(this.components);
-            this.strRecordStatus = new System.Windows.Forms.Label();
             this.frmTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogo)).BeginInit();
             this.frmStatus.SuspendLayout();
@@ -111,9 +108,8 @@ namespace DataProcessProgram
             this.tabDataPlot.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
-            this.tabView.SuspendLayout();
-            this.tabGridView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDataView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataViewContainer)).BeginInit();
+            this.dataViewContainer.SuspendLayout();
             this.tabAbout.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -658,6 +654,7 @@ namespace DataProcessProgram
             this.numVoletOffset.Size = new System.Drawing.Size(94, 26);
             this.numVoletOffset.TabIndex = 2;
             this.numVoletOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numVoletOffset.ValueChanged += new System.EventHandler(this.numVoletOffset_ValueChanged);
             // 
             // btnPreview
             // 
@@ -718,6 +715,16 @@ namespace DataProcessProgram
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // strRecordStatus
+            // 
+            this.strRecordStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.strRecordStatus.AutoSize = true;
+            this.strRecordStatus.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.strRecordStatus.Location = new System.Drawing.Point(632, 9);
+            this.strRecordStatus.Name = "strRecordStatus";
+            this.strRecordStatus.Size = new System.Drawing.Size(0, 16);
+            this.strRecordStatus.TabIndex = 1;
+            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 3;
@@ -772,7 +779,7 @@ namespace DataProcessProgram
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel7, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tabView, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.dataViewContainer, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -856,50 +863,15 @@ namespace DataProcessProgram
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
-            // tabView
+            // dataViewContainer
             // 
-            this.tabView.Controls.Add(this.tabPlotView);
-            this.tabView.Controls.Add(this.tabGridView);
-            this.tabView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabView.Location = new System.Drawing.Point(3, 43);
-            this.tabView.Name = "tabView";
-            this.tabView.SelectedIndex = 0;
-            this.tabView.Size = new System.Drawing.Size(767, 504);
-            this.tabView.TabIndex = 4;
-            // 
-            // tabPlotView
-            // 
-            this.tabPlotView.Location = new System.Drawing.Point(4, 22);
-            this.tabPlotView.Name = "tabPlotView";
-            this.tabPlotView.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlotView.Size = new System.Drawing.Size(759, 478);
-            this.tabPlotView.TabIndex = 1;
-            this.tabPlotView.Text = "图像";
-            this.tabPlotView.UseVisualStyleBackColor = true;
-            // 
-            // tabGridView
-            // 
-            this.tabGridView.Controls.Add(this.dgvDataView);
-            this.tabGridView.Location = new System.Drawing.Point(4, 22);
-            this.tabGridView.Name = "tabGridView";
-            this.tabGridView.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGridView.Size = new System.Drawing.Size(759, 478);
-            this.tabGridView.TabIndex = 0;
-            this.tabGridView.Text = "表格";
-            this.tabGridView.UseVisualStyleBackColor = true;
-            // 
-            // dgvDataView
-            // 
-            this.dgvDataView.AllowUserToAddRows = false;
-            this.dgvDataView.AllowUserToDeleteRows = false;
-            this.dgvDataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDataView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDataView.Location = new System.Drawing.Point(3, 3);
-            this.dgvDataView.Name = "dgvDataView";
-            this.dgvDataView.ReadOnly = true;
-            this.dgvDataView.RowTemplate.Height = 23;
-            this.dgvDataView.Size = new System.Drawing.Size(753, 472);
-            this.dgvDataView.TabIndex = 0;
+            this.dataViewContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataViewContainer.Location = new System.Drawing.Point(3, 43);
+            this.dataViewContainer.Name = "dataViewContainer";
+            this.dataViewContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.dataViewContainer.Size = new System.Drawing.Size(767, 504);
+            this.dataViewContainer.SplitterDistance = 255;
+            this.dataViewContainer.TabIndex = 4;
             // 
             // tabAbout
             // 
@@ -990,16 +962,6 @@ namespace DataProcessProgram
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Text = resources.GetString("textBoxDescription.Text");
             // 
-            // strRecordStatus
-            // 
-            this.strRecordStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.strRecordStatus.AutoSize = true;
-            this.strRecordStatus.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.strRecordStatus.Location = new System.Drawing.Point(632, 9);
-            this.strRecordStatus.Name = "strRecordStatus";
-            this.strRecordStatus.Size = new System.Drawing.Size(0, 16);
-            this.strRecordStatus.TabIndex = 1;
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1041,9 +1003,8 @@ namespace DataProcessProgram
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
-            this.tabView.ResumeLayout(false);
-            this.tabGridView.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDataView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataViewContainer)).EndInit();
+            this.dataViewContainer.ResumeLayout(false);
             this.tabAbout.ResumeLayout(false);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
@@ -1106,13 +1067,10 @@ namespace DataProcessProgram
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Label strDataFile;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TabControl tabView;
-        private System.Windows.Forms.TabPage tabPlotView;
-        private System.Windows.Forms.TabPage tabGridView;
-        private System.Windows.Forms.DataGridView dgvDataView;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnClean;
         private System.Windows.Forms.Label strRecordStatus;
+        private System.Windows.Forms.SplitContainer dataViewContainer;
     }
 }
 

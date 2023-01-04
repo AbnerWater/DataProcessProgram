@@ -99,14 +99,13 @@ namespace DataControl
                             {
                                 try
                                 {
-                                    string[] strtmp = temp.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                                    string[] date = strtmp[0].Split('-');
-                                    string[] time = strtmp[1].Split(new char[] { ':', '.' });
-                                    TimeList.Add(new DateTime(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2]),
-                                        int.Parse(time[0]), int.Parse(time[1]), int.Parse(time[2]), int.Parse(time[3]), DateTimeKind.Local));
+                                    string[] strtmp = temp.Split(new char[] {'\t' }, StringSplitOptions.RemoveEmptyEntries);
+                                    DateTime date;
+                                    if(DateTime.TryParse(strtmp[0],out date))
+                                        TimeList.Add(date);
                                     double i, v;
-                                    i = double.Parse(strtmp[2]);
-                                    v = double.Parse(strtmp[3]);
+                                    i = double.Parse(strtmp[1]);
+                                    v = double.Parse(strtmp[2]);
                                     Signal_I.Add(i);
                                     Signal_V.Add(v);
                                 }

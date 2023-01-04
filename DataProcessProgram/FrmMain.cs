@@ -70,7 +70,8 @@ namespace DataProcessProgram
         #endregion
         private LightningChartUltimate _voletPlot;
         private LightningChartUltimate _currentPlot;
-        private LightningChartUltimate _displayPlot;
+        private LightningChartUltimate _currentDisplay;
+        private LightningChartUltimate _voletDisplay;
         private System.Timers.Timer _sysTimer;
         private System.Timers.Timer _plotTimer;
         private System.Timers.Timer _recTimer;
@@ -105,33 +106,16 @@ namespace DataProcessProgram
         {
 
         }
-        private void loadData2dgv(DataSet data)
-        {
-            formateDgv();
-            for (int i = 0; i < data.TimeList.Count; i++)
-            {
-                dgvDataView.Rows.Add();
-                dgvDataView.Rows[i].HeaderCell.Value = i + 1;
-                dgvDataView.Rows[i].Cells[0].Value = data.TimeList[i].ToString("yyyy-MM-dd HH:mm:ss.fff");
-                dgvDataView.Rows[i].Cells[1].Value = data.Signal_I[i].ToString("f5");
-                dgvDataView.Rows[i].Cells[2].Value = data.Signal_V[i].ToString("f5");
-            }
-        }
         private void loadData2Plot(DataSet data)
         {
-            PlotMethod.AddLineXY(_displayPlot, data.TimeList, data.Signal_I, "电流信号", Color.Blue);
-            PlotMethod.AddLineXY(_displayPlot, data.TimeList, data.Signal_V, "电压信号", Color.Red);
-        }
-        private void formateDgv()
-        {
-            dgvDataView.Rows.Clear();
-            dgvDataView.Columns.Clear();
-            dgvDataView.Columns.Add("time", "采集时间");
-            dgvDataView.Columns.Add("signal_i", "电流信号");
-            dgvDataView.Columns.Add("signal_v", "电压信号");
-            dgvDataView.Columns[0].Width = 200;
-            dgvDataView.Columns[1].Width = 100;
-            dgvDataView.Columns[2].Width = 100;
+            if(data.TimeList.Count== data.Signal_I.Count)
+                PlotMethod.AddLineXY(_currentDisplay, data.TimeList, data.Signal_I, "电流信号", Color.Blue);
+            else
+                PlotMethod.AddLineXY(_currentDisplay, data.Signal_I, "电流信号", Color.Blue);
+            if(data.TimeList.Count == data.Signal_V.Count)
+                PlotMethod.AddLineXY(_voletDisplay, data.TimeList, data.Signal_V, "电压信号", Color.Red);
+            else
+                PlotMethod.AddLineXY(_voletDisplay, data.Signal_V, "电压信号", Color.Red);
         }
         private void FrmMain_Load(object sender, EventArgs e)
         {
@@ -141,17 +125,17 @@ namespace DataProcessProgram
             lblProductName.Text = Application.ProductName;
             labelVersion.Text = string.Format(labelVersion.Text, Application.ProductVersion);
             textBoxDescription.Text = string.Format(textBoxDescription.Text, Application.ProductName);
-            _rsDevice = new RsDevice(50);
+            _rsDevice = new RsDevice(10);
             #region iniTimer
             _sysTimer = new System.Timers.Timer(500);
             _sysTimer.AutoReset = true;
             _sysTimer.Elapsed += _sysTimer_Elapsed;
             _sysTimer.Start();
-            _plotTimer = new System.Timers.Timer(50);
+            _plotTimer = new System.Timers.Timer(10);
             _plotTimer.AutoReset = true;
             _plotTimer.Elapsed += _plotTimer_Elapsed;
             _plotTimer.Start();
-            _recTimer = new System.Timers.Timer(50);
+            _recTimer = new System.Timers.Timer(10);
             _recTimer.AutoReset = true;
             _recTimer.Elapsed += _recTimer_Elapsed;
             _recTimer.Start();
@@ -161,16 +145,17 @@ namespace DataProcessProgram
             mainTab.ItemSize = new Size(0, 1);
             mainTab.SizeMode = TabSizeMode.Fixed;
             _currentPlot = PlotMethod.CreateChart(null);
-            PlotMethod.formatLcuXY(_currentPlot, "电流采集","电流(pA/V)", -5, 5);
+            PlotMethod.formatLcuXY(_currentPlot, "电流采集","电流(pA)", 0, 1e6);
             PlotMethod.addDefaultLine(_currentPlot);
             tableDataRecord.Controls.Add(_currentPlot, 0, 2);
             _voletPlot = PlotMethod.CreateChart(null);
-            PlotMethod.formatLcuXY(_voletPlot, "电压采集","电压(mV)", -1, 1);
+            PlotMethod.formatLcuXY(_voletPlot, "电压采集","电压(mV)", 0, 1000);
             PlotMethod.addDefaultLine(_voletPlot);
             tableDataRecord.Controls.Add(_voletPlot, 0, 3);
-            _displayPlot = PlotMethod.CreateChart(tabPlotView);
-            PlotMethod.formatLcuXY(_displayPlot, "", "", -5, 5);
-            formateDgv();
+            _currentDisplay = PlotMethod.CreateChart(dataViewContainer.Panel1);
+            PlotMethod.formatLcuXY(_currentDisplay, "电流数据", "电流(pA)", 0, 1e12);
+            _voletDisplay = PlotMethod.CreateChart(dataViewContainer.Panel2);
+            PlotMethod.formatLcuXY(_voletDisplay, "电压数据", "电压(mV)", 0, 1000);
             foreach (var v in SerialPort.GetPortNames())
             {
                 cbxComPort.Items.Add(v);
@@ -381,7 +366,8 @@ namespace DataProcessProgram
                 if (data.LoadFromFile(ofd.FileName))
                 {
                     strDataFile.Text = data.Name;
-                    loadData2dgv(data);
+                    PlotMethod.ClearLines(_currentDisplay);
+                    PlotMethod.ClearLines(_voletDisplay);
                     loadData2Plot(data);
                 }
                 else
@@ -413,8 +399,8 @@ namespace DataProcessProgram
         {
             if(!_preview)
             {
-                PlotMethod.formatLcuXY(_currentPlot, "电流采集", "电流(pA/V)", -5, 5);
-                PlotMethod.formatLcuXY(_voletPlot, "电压采集", "电压(mV)", -1, 1);
+                PlotMethod.formatLcuXY(_currentPlot, "电流采集", "电流(pA)", 0, 1e12);
+                PlotMethod.formatLcuXY(_voletPlot, "电压采集", "电压(mV)", 0, 1000);
             }
             _preview = !_preview;
         }
@@ -440,8 +426,13 @@ namespace DataProcessProgram
         private void btnClean_Click(object sender, EventArgs e)
         {
             strDataFile.Text = "---";
-            PlotMethod.ClearLines(_displayPlot);
-            formateDgv();
+            PlotMethod.ClearLines(_currentDisplay);
+            PlotMethod.ClearLines(_voletDisplay);
+        }
+
+        private void numVoletOffset_ValueChanged(object sender, EventArgs e)
+        {
+            _rsDevice.SetVoletOffset((double)(sender as NumericUpDown).Value);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace DisplayControl
         {
             lcu.BeginUpdate();
             //Reduce memory usage and increase performance. Destroys out-scrolled data. 
-            lcu.ViewXY.DropOldSeriesData = true;
+            lcu.ViewXY.DropOldSeriesData = false;
             lcu.Title.Text = title;
             lcu.Dock = DockStyle.Fill;
             lcu.ColorTheme = ColorTheme.LightGray;
@@ -102,6 +102,7 @@ namespace DisplayControl
             points[0].X = lcu.ViewXY.XAxes[0].DateTimeToAxisValue(DateTime.Now);
             points[0].Y = angle;
             lcu.ViewXY.PointLineSeries[lineIndex].AddPoints(points, false);
+            lcu.ViewXY.YAxes[0].SetRange(lcu.ViewXY.PointLineSeries[lineIndex].GetYValues().Min(), lcu.ViewXY.PointLineSeries[lineIndex].GetYValues().Max());
             lcu.EndUpdate();
         }
         public static void trackPlot(LightningChartUltimate lcu, DateTime time, double value, int lineIndex)
@@ -112,6 +113,7 @@ namespace DisplayControl
             points[0].Y = value;
             lcu.ViewXY.PointLineSeries[lineIndex].AddPoints(points, false);
             lcu.ViewXY.XAxes[0].ScrollPosition = points[0].X;
+            lcu.ViewXY.YAxes[0].SetRange(lcu.ViewXY.PointLineSeries[lineIndex].GetYValues().Min(), lcu.ViewXY.PointLineSeries[lineIndex].GetYValues().Max());
             lcu.EndUpdate();
         }
         public static void AddLineXY(LightningChartUltimate lcu,List<DateTime> time,List<double> value,string name,Color col)
@@ -124,6 +126,28 @@ namespace DisplayControl
             for (int i = 0; i < points.Length; i++)
             {
                 points[i].X= lcu.ViewXY.XAxes[0].DateTimeToAxisValue(time[i]);
+                points[i].Y = value[i];
+            }
+            ls.Points = points;
+            ls.InvalidateData();
+            ls.Title.Text = name;
+            ls.LineStyle.Color = col;
+            ls.ShowInLegendBox = true;
+            lcu.ViewXY.PointLineSeries.Add(ls);
+            lcu.ViewXY.LegendBoxes[0].Visible = true;
+            lcu.ViewXY.ZoomToFit();
+            lcu.EndUpdate();
+        }
+        public static void AddLineXY(LightningChartUltimate lcu, List<double> value, string name, Color col)
+        {
+            lcu.BeginUpdate();
+            PointLineSeries ls = new PointLineSeries(lcu.ViewXY, lcu.ViewXY.XAxes[0], lcu.ViewXY.YAxes[0]);
+            ls.PointsVisible = false;
+            ls.LineVisible = true;
+            SeriesPoint[] points = new SeriesPoint[value.Count];
+            for (int i = 0; i < points.Length; i++)
+            {
+                points[i].X = i;
                 points[i].Y = value[i];
             }
             ls.Points = points;
