@@ -48,10 +48,8 @@ namespace DataProcessProgram
             this.btnHome = new System.Windows.Forms.Button();
             this.mainTab = new System.Windows.Forms.TabControl();
             this.tabWelcome = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnDeviceConnect = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabDevice = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -89,6 +87,9 @@ namespace DataProcessProgram
             this.labelCopyright = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.Help = new System.Windows.Forms.ToolTip(this.components);
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.frmTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogo)).BeginInit();
             this.frmStatus.SuspendLayout();
@@ -96,7 +97,6 @@ namespace DataProcessProgram
             this.tabPanel.SuspendLayout();
             this.mainTab.SuspendLayout();
             this.tabWelcome.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.tabDevice.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -112,6 +112,7 @@ namespace DataProcessProgram
             this.dataViewContainer.SuspendLayout();
             this.tabAbout.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // frmTitle
@@ -127,7 +128,7 @@ namespace DataProcessProgram
             this.frmTitle.MaximumSize = new System.Drawing.Size(0, 50);
             this.frmTitle.MinimumSize = new System.Drawing.Size(0, 50);
             this.frmTitle.Name = "frmTitle";
-            this.frmTitle.Size = new System.Drawing.Size(987, 50);
+            this.frmTitle.Size = new System.Drawing.Size(1113, 50);
             this.frmTitle.TabIndex = 1;
             this.frmTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmTitle_MouseDown);
             // 
@@ -140,7 +141,7 @@ namespace DataProcessProgram
             this.btnMinimal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
             this.btnMinimal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMinimal.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimal.Image")));
-            this.btnMinimal.Location = new System.Drawing.Point(807, 0);
+            this.btnMinimal.Location = new System.Drawing.Point(933, 0);
             this.btnMinimal.Name = "btnMinimal";
             this.btnMinimal.Size = new System.Drawing.Size(60, 50);
             this.btnMinimal.TabIndex = 4;
@@ -156,7 +157,7 @@ namespace DataProcessProgram
             this.btnMaxminal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
             this.btnMaxminal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaxminal.Image = ((System.Drawing.Image)(resources.GetObject("btnMaxminal.Image")));
-            this.btnMaxminal.Location = new System.Drawing.Point(867, 0);
+            this.btnMaxminal.Location = new System.Drawing.Point(993, 0);
             this.btnMaxminal.Name = "btnMaxminal";
             this.btnMaxminal.Size = new System.Drawing.Size(60, 50);
             this.btnMaxminal.TabIndex = 3;
@@ -172,7 +173,7 @@ namespace DataProcessProgram
             this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(927, 0);
+            this.btnClose.Location = new System.Drawing.Point(1053, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(60, 50);
             this.btnClose.TabIndex = 2;
@@ -186,7 +187,7 @@ namespace DataProcessProgram
             this.strProgram.BackColor = System.Drawing.Color.Transparent;
             this.strProgram.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.strProgram.ForeColor = System.Drawing.Color.AliceBlue;
-            this.strProgram.Location = new System.Drawing.Point(56, 15);
+            this.strProgram.Location = new System.Drawing.Point(161, 17);
             this.strProgram.Name = "strProgram";
             this.strProgram.Size = new System.Drawing.Size(195, 16);
             this.strProgram.TabIndex = 1;
@@ -199,7 +200,8 @@ namespace DataProcessProgram
             this.frmLogo.Image = ((System.Drawing.Image)(resources.GetObject("frmLogo.Image")));
             this.frmLogo.Location = new System.Drawing.Point(0, 0);
             this.frmLogo.Name = "frmLogo";
-            this.frmLogo.Size = new System.Drawing.Size(50, 50);
+            this.frmLogo.Size = new System.Drawing.Size(146, 50);
+            this.frmLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.frmLogo.TabIndex = 0;
             this.frmLogo.TabStop = false;
             // 
@@ -209,11 +211,11 @@ namespace DataProcessProgram
             this.frmStatus.Controls.Add(this.picStatus);
             this.frmStatus.Controls.Add(this.strStatus);
             this.frmStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.frmStatus.Location = new System.Drawing.Point(0, 632);
+            this.frmStatus.Location = new System.Drawing.Point(0, 589);
             this.frmStatus.MaximumSize = new System.Drawing.Size(0, 32);
             this.frmStatus.MinimumSize = new System.Drawing.Size(0, 32);
             this.frmStatus.Name = "frmStatus";
-            this.frmStatus.Size = new System.Drawing.Size(987, 32);
+            this.frmStatus.Size = new System.Drawing.Size(1113, 32);
             this.frmStatus.TabIndex = 2;
             this.frmStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Status_MouseDown);
             // 
@@ -250,10 +252,10 @@ namespace DataProcessProgram
             this.tabPanel.Controls.Add(this.btnHome);
             this.tabPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabPanel.Location = new System.Drawing.Point(0, 50);
-            this.tabPanel.MaximumSize = new System.Drawing.Size(200, 0);
-            this.tabPanel.MinimumSize = new System.Drawing.Size(200, 0);
+            this.tabPanel.MaximumSize = new System.Drawing.Size(220, 0);
+            this.tabPanel.MinimumSize = new System.Drawing.Size(220, 0);
             this.tabPanel.Name = "tabPanel";
-            this.tabPanel.Size = new System.Drawing.Size(200, 582);
+            this.tabPanel.Size = new System.Drawing.Size(220, 539);
             this.tabPanel.TabIndex = 3;
             // 
             // btnAbout
@@ -271,7 +273,7 @@ namespace DataProcessProgram
             this.btnAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAbout.Location = new System.Drawing.Point(0, 200);
             this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(200, 50);
+            this.btnAbout.Size = new System.Drawing.Size(220, 50);
             this.btnAbout.TabIndex = 4;
             this.btnAbout.Text = "关于";
             this.btnAbout.UseVisualStyleBackColor = false;
@@ -292,7 +294,7 @@ namespace DataProcessProgram
             this.btnDisplay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDisplay.Location = new System.Drawing.Point(0, 150);
             this.btnDisplay.Name = "btnDisplay";
-            this.btnDisplay.Size = new System.Drawing.Size(200, 50);
+            this.btnDisplay.Size = new System.Drawing.Size(220, 50);
             this.btnDisplay.TabIndex = 3;
             this.btnDisplay.Text = "数据显示";
             this.btnDisplay.UseVisualStyleBackColor = false;
@@ -313,7 +315,7 @@ namespace DataProcessProgram
             this.btnData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnData.Location = new System.Drawing.Point(0, 100);
             this.btnData.Name = "btnData";
-            this.btnData.Size = new System.Drawing.Size(200, 50);
+            this.btnData.Size = new System.Drawing.Size(220, 50);
             this.btnData.TabIndex = 2;
             this.btnData.Text = "测序采集";
             this.btnData.UseVisualStyleBackColor = false;
@@ -334,7 +336,7 @@ namespace DataProcessProgram
             this.btnDevice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDevice.Location = new System.Drawing.Point(0, 50);
             this.btnDevice.Name = "btnDevice";
-            this.btnDevice.Size = new System.Drawing.Size(200, 50);
+            this.btnDevice.Size = new System.Drawing.Size(220, 50);
             this.btnDevice.TabIndex = 1;
             this.btnDevice.Text = "仪器连接";
             this.btnDevice.UseVisualStyleBackColor = false;
@@ -355,7 +357,7 @@ namespace DataProcessProgram
             this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnHome.Location = new System.Drawing.Point(0, 0);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(200, 50);
+            this.btnHome.Size = new System.Drawing.Size(220, 50);
             this.btnHome.TabIndex = 0;
             this.btnHome.Text = "首页";
             this.btnHome.UseVisualStyleBackColor = false;
@@ -369,76 +371,68 @@ namespace DataProcessProgram
             this.mainTab.Controls.Add(this.tabDataPlot);
             this.mainTab.Controls.Add(this.tabAbout);
             this.mainTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainTab.Location = new System.Drawing.Point(200, 50);
+            this.mainTab.Location = new System.Drawing.Point(220, 50);
             this.mainTab.Name = "mainTab";
             this.mainTab.SelectedIndex = 0;
-            this.mainTab.Size = new System.Drawing.Size(787, 582);
+            this.mainTab.Size = new System.Drawing.Size(893, 539);
             this.mainTab.TabIndex = 4;
             this.mainTab.TabStop = false;
             // 
             // tabWelcome
             // 
-            this.tabWelcome.Controls.Add(this.flowLayoutPanel1);
+            this.tabWelcome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabWelcome.Controls.Add(this.tableLayoutPanel3);
             this.tabWelcome.Location = new System.Drawing.Point(4, 22);
             this.tabWelcome.Name = "tabWelcome";
             this.tabWelcome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWelcome.Size = new System.Drawing.Size(779, 556);
+            this.tabWelcome.Size = new System.Drawing.Size(885, 513);
             this.tabWelcome.TabIndex = 0;
             this.tabWelcome.Text = "首页";
             this.tabWelcome.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel1
+            // button2
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btnDeviceConnect);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(773, 550);
-            this.flowLayoutPanel1.TabIndex = 0;
-            // 
-            // btnDeviceConnect
-            // 
-            this.btnDeviceConnect.BackColor = System.Drawing.Color.LightGreen;
-            this.btnDeviceConnect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDeviceConnect.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDeviceConnect.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnDeviceConnect.Location = new System.Drawing.Point(3, 3);
-            this.btnDeviceConnect.Name = "btnDeviceConnect";
-            this.btnDeviceConnect.Size = new System.Drawing.Size(141, 72);
-            this.btnDeviceConnect.TabIndex = 0;
-            this.btnDeviceConnect.Text = "仪器连接";
-            this.btnDeviceConnect.UseVisualStyleBackColor = false;
-            this.btnDeviceConnect.Click += new System.EventHandler(this.btnDeviceConnect_Click);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PaleTurquoise;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleTurquoise;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button2.Location = new System.Drawing.Point(243, 256);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(193, 94);
+            this.button2.TabIndex = 2;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PaleTurquoise;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleTurquoise;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.Location = new System.Drawing.Point(150, 3);
+            this.button1.Location = new System.Drawing.Point(442, 156);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 72);
+            this.button1.Size = new System.Drawing.Size(194, 94);
             this.button1.TabIndex = 1;
-            this.button1.Text = "开始测序";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.NavajoWhite;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button2.Location = new System.Drawing.Point(297, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(141, 72);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "数据显示";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // tabDevice
             // 
@@ -446,7 +440,7 @@ namespace DataProcessProgram
             this.tabDevice.Location = new System.Drawing.Point(4, 22);
             this.tabDevice.Name = "tabDevice";
             this.tabDevice.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDevice.Size = new System.Drawing.Size(779, 556);
+            this.tabDevice.Size = new System.Drawing.Size(885, 513);
             this.tabDevice.TabIndex = 1;
             this.tabDevice.Text = "设备连接";
             this.tabDevice.UseVisualStyleBackColor = true;
@@ -465,7 +459,7 @@ namespace DataProcessProgram
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.50524F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.49476F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 550);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(879, 507);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // tableLayoutPanel6
@@ -489,7 +483,7 @@ namespace DataProcessProgram
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(767, 34);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(873, 34);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
             // btnRefresh
@@ -575,7 +569,7 @@ namespace DataProcessProgram
             this.tabData.Location = new System.Drawing.Point(4, 22);
             this.tabData.Name = "tabData";
             this.tabData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabData.Size = new System.Drawing.Size(779, 556);
+            this.tabData.Size = new System.Drawing.Size(885, 513);
             this.tabData.TabIndex = 2;
             this.tabData.Text = "数据采集";
             this.tabData.UseVisualStyleBackColor = true;
@@ -595,7 +589,7 @@ namespace DataProcessProgram
             this.tableDataRecord.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableDataRecord.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.50524F));
             this.tableDataRecord.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.49476F));
-            this.tableDataRecord.Size = new System.Drawing.Size(773, 550);
+            this.tableDataRecord.Size = new System.Drawing.Size(879, 507);
             this.tableDataRecord.TabIndex = 2;
             // 
             // tableLayoutPanel4
@@ -622,7 +616,7 @@ namespace DataProcessProgram
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(767, 34);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(873, 34);
             this.tableLayoutPanel4.TabIndex = 2;
             // 
             // label3
@@ -720,7 +714,7 @@ namespace DataProcessProgram
             this.strRecordStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.strRecordStatus.AutoSize = true;
             this.strRecordStatus.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.strRecordStatus.Location = new System.Drawing.Point(632, 9);
+            this.strRecordStatus.Location = new System.Drawing.Point(685, 9);
             this.strRecordStatus.Name = "strRecordStatus";
             this.strRecordStatus.Size = new System.Drawing.Size(0, 16);
             this.strRecordStatus.TabIndex = 1;
@@ -738,7 +732,7 @@ namespace DataProcessProgram
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(767, 34);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(873, 34);
             this.tableLayoutPanel5.TabIndex = 3;
             // 
             // strDeviceName
@@ -769,7 +763,7 @@ namespace DataProcessProgram
             this.tabDataPlot.Location = new System.Drawing.Point(4, 22);
             this.tabDataPlot.Name = "tabDataPlot";
             this.tabDataPlot.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDataPlot.Size = new System.Drawing.Size(779, 556);
+            this.tabDataPlot.Size = new System.Drawing.Size(885, 513);
             this.tabDataPlot.TabIndex = 3;
             this.tabDataPlot.Text = "数据显示";
             this.tabDataPlot.UseVisualStyleBackColor = true;
@@ -788,7 +782,7 @@ namespace DataProcessProgram
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(773, 550);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(879, 507);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // tableLayoutPanel7
@@ -808,7 +802,7 @@ namespace DataProcessProgram
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(767, 34);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(873, 34);
             this.tableLayoutPanel7.TabIndex = 3;
             // 
             // btnOpen
@@ -869,8 +863,8 @@ namespace DataProcessProgram
             this.dataViewContainer.Location = new System.Drawing.Point(3, 43);
             this.dataViewContainer.Name = "dataViewContainer";
             this.dataViewContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.dataViewContainer.Size = new System.Drawing.Size(767, 504);
-            this.dataViewContainer.SplitterDistance = 255;
+            this.dataViewContainer.Size = new System.Drawing.Size(873, 461);
+            this.dataViewContainer.SplitterDistance = 233;
             this.dataViewContainer.TabIndex = 4;
             // 
             // tabAbout
@@ -880,7 +874,7 @@ namespace DataProcessProgram
             this.tabAbout.Location = new System.Drawing.Point(4, 22);
             this.tabAbout.Name = "tabAbout";
             this.tabAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAbout.Size = new System.Drawing.Size(779, 556);
+            this.tabAbout.Size = new System.Drawing.Size(885, 513);
             this.tabAbout.TabIndex = 4;
             this.tabAbout.Text = "关于";
             this.tabAbout.UseVisualStyleBackColor = true;
@@ -905,18 +899,18 @@ namespace DataProcessProgram
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(773, 550);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(879, 507);
             this.tableLayoutPanel.TabIndex = 1;
             // 
             // lblProductName
             // 
             this.lblProductName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblProductName.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblProductName.Location = new System.Drawing.Point(36, 0);
+            this.lblProductName.Location = new System.Drawing.Point(40, 0);
             this.lblProductName.Margin = new System.Windows.Forms.Padding(7, 0, 3, 0);
             this.lblProductName.MaximumSize = new System.Drawing.Size(0, 23);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(734, 23);
+            this.lblProductName.Size = new System.Drawing.Size(836, 23);
             this.lblProductName.TabIndex = 19;
             this.lblProductName.Text = "RotorAnalysisProgram分析软件-(RotorAnalysisProgram Analysis Program)";
             this.lblProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -925,11 +919,11 @@ namespace DataProcessProgram
             // 
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelVersion.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelVersion.Location = new System.Drawing.Point(36, 55);
+            this.labelVersion.Location = new System.Drawing.Point(40, 50);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(7, 0, 3, 0);
             this.labelVersion.MaximumSize = new System.Drawing.Size(0, 23);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(734, 23);
+            this.labelVersion.Size = new System.Drawing.Size(836, 23);
             this.labelVersion.TabIndex = 0;
             this.labelVersion.Text = "版本:    {0:s}";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -938,11 +932,11 @@ namespace DataProcessProgram
             // 
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelCopyright.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelCopyright.Location = new System.Drawing.Point(36, 110);
+            this.labelCopyright.Location = new System.Drawing.Point(40, 100);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(7, 0, 3, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 23);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(734, 23);
+            this.labelCopyright.Size = new System.Drawing.Size(836, 23);
             this.labelCopyright.TabIndex = 21;
             this.labelCopyright.Text = "西安交通大学 版权所有";
             this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -951,23 +945,91 @@ namespace DataProcessProgram
             // 
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxDescription.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxDescription.Location = new System.Drawing.Point(36, 224);
+            this.textBoxDescription.Location = new System.Drawing.Point(40, 204);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(7, 4, 3, 4);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ReadOnly = true;
             this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDescription.Size = new System.Drawing.Size(734, 267);
+            this.textBoxDescription.Size = new System.Drawing.Size(836, 245);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Text = resources.GetString("textBoxDescription.Text");
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PaleTurquoise;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleTurquoise;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button3.Location = new System.Drawing.Point(442, 256);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(194, 94);
+            this.button3.TabIndex = 2;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.BackColor = System.Drawing.Color.Transparent;
+            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PaleTurquoise;
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleTurquoise;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button4.Location = new System.Drawing.Point(243, 156);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(193, 94);
+            this.button4.TabIndex = 2;
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tableLayoutPanel3.BackgroundImage")));
+            this.tableLayoutPanel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tableLayoutPanel3.ColumnCount = 4;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 199F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.button4, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.button3, 2, 2);
+            this.tableLayoutPanel3.Controls.Add(this.button1, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.button2, 1, 2);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(879, 507);
+            this.tableLayoutPanel3.TabIndex = 3;
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(987, 664);
+            this.ClientSize = new System.Drawing.Size(1113, 621);
             this.Controls.Add(this.mainTab);
             this.Controls.Add(this.tabPanel);
             this.Controls.Add(this.frmStatus);
@@ -987,7 +1049,6 @@ namespace DataProcessProgram
             this.tabPanel.ResumeLayout(false);
             this.mainTab.ResumeLayout(false);
             this.tabWelcome.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.tabDevice.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
@@ -1008,6 +1069,7 @@ namespace DataProcessProgram
             this.tabAbout.ResumeLayout(false);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1032,8 +1094,6 @@ namespace DataProcessProgram
         private System.Windows.Forms.Button btnData;
         private System.Windows.Forms.Button btnDevice;
         private System.Windows.Forms.Button btnHome;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnDeviceConnect;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnAbout;
@@ -1071,6 +1131,9 @@ namespace DataProcessProgram
         private System.Windows.Forms.Button btnClean;
         private System.Windows.Forms.Label strRecordStatus;
         private System.Windows.Forms.SplitContainer dataViewContainer;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }
 

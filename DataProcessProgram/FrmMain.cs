@@ -117,6 +117,14 @@ namespace DataProcessProgram
             else
                 PlotMethod.AddLineXY(_voletDisplay, data.Signal_V, "电压信号", Color.Red);
         }
+        private void clearBtnColor()
+        {
+            btnHome.BackColor = Color.Transparent;
+            btnDevice.BackColor = Color.Transparent;
+            btnDisplay.BackColor = Color.Transparent;
+            btnAbout.BackColor = Color.Transparent;
+            btnData.BackColor = Color.Transparent;
+        }
         private void FrmMain_Load(object sender, EventArgs e)
         {
             SplasherForm.Status = "界面初始化......";
@@ -166,7 +174,7 @@ namespace DataProcessProgram
             #endregion
             _data = new DataSet();
             SplasherForm.Status = "初始化完毕";
-            Thread.Sleep(300);
+            Thread.Sleep(2500);
             SplasherForm.Close();
             this.FormClosing += FrmMain_FormClosing;
         }
@@ -311,34 +319,50 @@ namespace DataProcessProgram
         private void button1_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabWelcome;
+            clearBtnColor();
+            (sender as Button).BackColor = Color.Teal;
         }
         private void btnDevice_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabDevice;
+            clearBtnColor();
+            (sender as Button).BackColor = Color.Teal;
         }
         private void btnData_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabData;
+            clearBtnColor();
+            (sender as Button).BackColor = Color.Teal;
         }
         private void btnDisplay_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabDataPlot;
+            clearBtnColor();
+            (sender as Button).BackColor = Color.Teal;
         }
         private void btnAbout_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabAbout;
+            clearBtnColor();
+            (sender as Button).BackColor = Color.Teal;
         }
         private void btnDeviceConnect_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabDevice;
+            clearBtnColor();
+            btnDevice.BackColor = Color.Teal;
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabData;
+            clearBtnColor();
+            btnData.BackColor = Color.Teal;
         }
         private void button2_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabDataPlot;
+            clearBtnColor();
+            btnDisplay.BackColor = Color.Teal;
         }
         private void btnConnect_Click(object sender, EventArgs e)
         {
@@ -433,6 +457,20 @@ namespace DataProcessProgram
         private void numVoletOffset_ValueChanged(object sender, EventArgs e)
         {
             _rsDevice.SetVoletOffset((double)(sender as NumericUpDown).Value);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            mainTab.SelectedTab = tabData;
+            clearBtnColor();
+            btnData.BackColor = Color.Teal;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            mainTab.SelectedTab = tabDevice;
+            clearBtnColor();
+            btnDevice.BackColor = Color.Teal;
         }
     }
 }

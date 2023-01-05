@@ -17,6 +17,13 @@ namespace DataProcessProgram
         {
             InitializeComponent();
             this.CenterToScreen();
+            pboxLogo.Parent = picAnimation;
+            pboxLogo.BackColor = Color.FromArgb(0, pboxLogo.BackColor);
+            labProgramName.Parent = picAnimation;
+            labProgramName.BackColor = Color.FromArgb(0, labProgramName.BackColor);
+            splasherStatus.Parent = picAnimation;
+            splasherStatus.BackColor = Color.FromArgb(0, splasherStatus.BackColor);
+            picAnimation.ImageLocation = System.IO.Path.Combine(Application.StartupPath, "Resources", "测序仪开机动画.gif");
         }
         //实现接口方法，主要用于接口的反射调用
         #region ISplashForm
