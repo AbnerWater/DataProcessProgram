@@ -93,7 +93,7 @@ namespace DeviceControl
             }
         }
         protected virtual void processData(byte[] data) { }
-        public bool Connect(string port, int rate)
+        public virtual bool Connect(string port, int rate)
         {
             PortName = port;
             BaudRate = rate;

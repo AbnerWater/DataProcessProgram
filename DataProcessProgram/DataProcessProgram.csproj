@@ -214,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="program.ico" />
+    <None Include="Resources\日志.png" />
     <Content Include="Resources\测序仪开机动画.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -91,20 +91,34 @@ namespace DataProcessProgram
                 if (MessageBox.Show("当前已连接至仪器，是否断开并重新连接", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {
                     _rsDevice.Disconnect();
-                    _rsDevice.Connect(port, int.Parse(buad));
+                    if(_rsDevice.Connect(port, int.Parse(buad)))
+                        systemLog("设备" + port + "重新连接成功！");
                 }
             }
             else
-                _rsDevice.Connect(port, int.Parse(buad));
+            {
+                if (_rsDevice.Connect(port, int.Parse(buad)))
+                {
+                    systemLog("设备" + port + "连接成功！");
+                    if (_rsDevice.Mode == DeviceMode.Pack)
+                        radPack.Checked = true;
+                    else
+                        radPrint.Checked = true;
+                    cbxLowPass.Checked = _rsDevice.LowPassEnabled;
+                    numLowPass.Value = (decimal)_rsDevice.LowPass;
+                }
+                else
+                    systemLog("设备" + port + "连接失败！");
+            }
         }
         private void deviceDisconnect()
         {
             if (_rsDevice.Connection)
-                _rsDevice.Disconnect();
-        }
-        private void openDataset(string file)
-        {
-
+            {
+                if(_rsDevice.Disconnect())
+                    systemLog("设备" + _rsDevice.PortName + "断开连接！");
+            }
+                
         }
         private void loadData2Plot(DataSet data)
         {
@@ -124,6 +138,20 @@ namespace DataProcessProgram
             btnDisplay.BackColor = Color.Transparent;
             btnAbout.BackColor = Color.Transparent;
             btnData.BackColor = Color.Transparent;
+            btnSysLog.BackColor = Color.Transparent;
+        }
+        private void systemLog(string log)
+        {
+            string str = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            var seg = log.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach( var line in seg )
+            {
+                int len = tbxLog.Text.Length;
+                tbxLog.AppendText(str + " " + log + Environment.NewLine);
+                tbxLog.Select(len, 24);
+                tbxLog.SelectionColor = Color.Blue;
+                tbxLog.SelectionFont = new System.Drawing.Font(tbxLog.SelectionFont, FontStyle.Bold);
+            }
         }
         private void FrmMain_Load(object sender, EventArgs e)
         {
@@ -133,20 +161,22 @@ namespace DataProcessProgram
             lblProductName.Text = Application.ProductName;
             labelVersion.Text = string.Format(labelVersion.Text, Application.ProductVersion);
             textBoxDescription.Text = string.Format(textBoxDescription.Text, Application.ProductName);
-            _rsDevice = new RsDevice(10);
+            _rsDevice = new RsDevice(Properties.Settings.Default.iDataTimerSpan);
+            _rsDevice.ExceptionThrowed += _rsDevice_ExceptionThrowed;
             #region iniTimer
             _sysTimer = new System.Timers.Timer(500);
             _sysTimer.AutoReset = true;
             _sysTimer.Elapsed += _sysTimer_Elapsed;
             _sysTimer.Start();
-            _plotTimer = new System.Timers.Timer(10);
+            _plotTimer = new System.Timers.Timer(Properties.Settings.Default.iDataTimerSpan);
             _plotTimer.AutoReset = true;
             _plotTimer.Elapsed += _plotTimer_Elapsed;
             _plotTimer.Start();
-            _recTimer = new System.Timers.Timer(10);
+            _recTimer = new System.Timers.Timer(Properties.Settings.Default.iDataTimerSpan);
             _recTimer.AutoReset = true;
             _recTimer.Elapsed += _recTimer_Elapsed;
             _recTimer.Start();
+            numTimeSpan.Value = Properties.Settings.Default.iDataTimerSpan;
             #endregion
             #region GUI
             mainTab.Appearance = TabAppearance.FlatButtons;
@@ -164,6 +194,8 @@ namespace DataProcessProgram
             PlotMethod.formatLcuXY(_currentDisplay, "电流数据", "电流(pA)", 0, 1e12);
             _voletDisplay = PlotMethod.CreateChart(dataViewContainer.Panel2);
             PlotMethod.formatLcuXY(_voletDisplay, "电压数据", "电压(mV)", 0, 1000);
+            grpMode.Enabled = false;
+            grpLowPass.Enabled = false;
             foreach (var v in SerialPort.GetPortNames())
             {
                 cbxComPort.Items.Add(v);
@@ -177,6 +209,10 @@ namespace DataProcessProgram
             Thread.Sleep(2500);
             SplasherForm.Close();
             this.FormClosing += FrmMain_FormClosing;
+        }
+        private void _rsDevice_ExceptionThrowed(object sender, EventArgs e)
+        {
+            systemLog("设备异常：\n" + (sender as string));
         }
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -203,17 +239,17 @@ namespace DataProcessProgram
         {
             if (!_record)
                 return;
-            _data.AddData(DateTime.Now, _rsDevice.Data[0], _rsDevice.Data[1]);
+            _data.AddData(DateTime.Now, _rsDevice.Data, _rsDevice.Data);
         }
         private void _plotTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (!_preview)
                 return;
-            this.BeginInvoke(new Action(() =>
-            {
-                PlotMethod.trackPlot(_currentPlot, DateTime.Now, _rsDevice.Data[0], 0);
-                PlotMethod.trackPlot(_voletPlot, DateTime.Now, _rsDevice.Data[1], 0);
-            }));
+            //this.BeginInvoke(new Action(() =>
+            //{
+                PlotMethod.trackPlot(_currentPlot, DateTime.Now, _rsDevice.Data, 0);
+                PlotMethod.trackPlot(_voletPlot, DateTime.Now, _rsDevice.Data, 0);
+            //}));
         }
         private void MainTab_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -246,7 +282,7 @@ namespace DataProcessProgram
         }
         private void _sysTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            this.Invoke(new Action(() => {
+            this.BeginInvoke(new Action(() => {
                 if(_rsDevice.Connection)
                 {
                     strDeviceName.Text = _rsDevice.PortName;
@@ -255,6 +291,8 @@ namespace DataProcessProgram
                     picStatus.Image = Properties.Resources.正常;
                     btnConnect.BackColor = Color.LightGreen;
                     btnConnect.Text = "断开连接";
+                    grpMode.Enabled = true;
+                    grpLowPass.Enabled = true;
                 }
                 else if(_simulateDev)
                 {
@@ -264,6 +302,8 @@ namespace DataProcessProgram
                     picStatus.Image = Properties.Resources.正常;
                     btnConnect.BackColor = Color.White;
                     btnConnect.Text = "仪器连接";
+                    grpMode.Enabled = false;
+                    grpLowPass.Enabled = false;
                 }
                 else
                 {
@@ -272,6 +312,8 @@ namespace DataProcessProgram
                     picStatus.Image = Properties.Resources.错误;
                     btnConnect.BackColor = Color.White;
                     btnConnect.Text = "仪器连接";
+                    grpMode.Enabled = false;
+                    grpLowPass.Enabled = false;
                 }
                 if (_data.TimeList.Count > 0 && !_record)
                     btnSave.Enabled = true;
@@ -340,6 +382,12 @@ namespace DataProcessProgram
             clearBtnColor();
             (sender as Button).BackColor = Color.Teal;
         }
+        private void btnSysLog_Click(object sender, EventArgs e)
+        {
+            mainTab.SelectedTab = tabSysLog;
+            clearBtnColor();
+            (sender as Button).BackColor = Color.Teal;
+        }
         private void btnAbout_Click(object sender, EventArgs e)
         {
             mainTab.SelectedTab = tabAbout;
@@ -395,7 +443,7 @@ namespace DataProcessProgram
                     loadData2Plot(data);
                 }
                 else
-                    MessageBox.Show("打开数据文件出错，请检查数据文件格式后重试！");
+                    systemLog("打开数据文件" + ofd.FileName + "出错，请检查数据文件格式后重试！");
             }
         }
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -414,9 +462,9 @@ namespace DataProcessProgram
             {
                 _data.Saved = _data.SaveToFile(sfd.FileName);
                 if (_data.Saved)
-                    MessageBox.Show("数据文件成功保存至"+sfd.FileName);
+                    systemLog("数据文件成功保存至"+sfd.FileName);
                 else
-                    MessageBox.Show("保存数据文件失败，请重新采集后再试");
+                    systemLog("保存数据文件失败，请重新采集后再试");
             }
         }
         private void btnPreview_Click(object sender, EventArgs e)
@@ -425,6 +473,7 @@ namespace DataProcessProgram
             {
                 PlotMethod.formatLcuXY(_currentPlot, "电流采集", "电流(pA)", 0, 1e12);
                 PlotMethod.formatLcuXY(_voletPlot, "电压采集", "电压(mV)", 0, 1000);
+                systemLog("数据采集预览");
             }
             _preview = !_preview;
         }
@@ -432,13 +481,15 @@ namespace DataProcessProgram
         {
             if (_data.TimeList.Count > 0 && !_data.Saved)
             {
-                if (MessageBox.Show("再次记录会覆盖未保存的数据，是否继续？", "提示", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
-                {
-                    _data.ClearData();
-                    _data.Saved = false;
-                }
+                if (MessageBox.Show("再次记录会覆盖未保存的数据，是否继续？", "提示", MessageBoxButtons.YesNoCancel) != DialogResult.Yes)
+                    return;
             }
+            if (!_preview)
+                _preview = !_preview;
             _record = true;
+            _data.ClearData();
+            _data.Saved = false;
+            systemLog("开始记录数据...");
         }
         private void btnStop_Click(object sender, EventArgs e)
         {
@@ -446,6 +497,7 @@ namespace DataProcessProgram
                 _record = !_record;
             if (_preview)
                 _preview = !_preview;
+            systemLog("数据采集结束");
         }
         private void btnClean_Click(object sender, EventArgs e)
         {
@@ -471,6 +523,69 @@ namespace DataProcessProgram
             mainTab.SelectedTab = tabDevice;
             clearBtnColor();
             btnDevice.BackColor = Color.Teal;
+        }
+
+        private void radPack_CheckedChanged(object sender, EventArgs e)
+        {
+            if(_rsDevice.Connection&&radPack.Checked)
+            {
+                _rsDevice.SwitchPackMode();
+                systemLog("设备" + _rsDevice.PortName + "切换至数据包模式");
+                _rsDevice.DataPrinted -= _rsDevice_DataPrinted;
+            }
+        }
+
+        private void radPrint_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_rsDevice.Connection&&radPrint.Checked)
+            {
+                _rsDevice.SwitchPrintMode();
+                systemLog("设备" + _rsDevice.PortName + "切换至数据打印模式");
+                _rsDevice.DataPrinted += _rsDevice_DataPrinted;
+            }
+        }
+
+        private void _rsDevice_DataPrinted(object sender, EventArgs e)
+        {
+            systemLog("设备收到数据：" + (sender as string));
+        }
+
+        private void cbxLowPass_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_rsDevice.Connection)
+            {
+                if(cbxLowPass.Checked)
+                {
+                    numLowPass.Enabled = true;
+                    btnLowPass.Enabled = true;
+                    _rsDevice.SetLowPass((double)numLowPass.Value);
+                    systemLog("设备" + _rsDevice.PortName + "启用低通滤波：" + string.Format("{0:f1}Hz", (double)numLowPass.Value));
+                }
+                else
+                {
+                    numLowPass.Enabled = false;
+                    btnLowPass.Enabled = false;
+                    _rsDevice.SetRawData();
+                    systemLog("设备" + _rsDevice.PortName + "关闭低通滤波");
+                }
+            }
+        }
+
+        private void btnLowPass_Click(object sender, EventArgs e)
+        {
+            if (_rsDevice.Connection)
+            {
+                systemLog("设备" + _rsDevice.PortName + "设置低通滤波："+string.Format("{0:f1}Hz", (double)numLowPass.Value));
+                _rsDevice.SetLowPass((double)numLowPass.Value);
+            }
+        }
+
+        private void btnTimeSpan_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.iDataTimerSpan = (int)numTimeSpan.Value;
+            Properties.Settings.Default.Save();
+            _plotTimer.Interval= (int)numTimeSpan.Value;
+            _recTimer.Interval = (int)numTimeSpan.Value;
         }
     }
 }

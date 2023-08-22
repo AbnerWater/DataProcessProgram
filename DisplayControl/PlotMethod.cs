@@ -15,7 +15,9 @@ namespace DisplayControl
     {
         public static LightningChartUltimate CreateChart(Control parent)
         {
-            LightningChartUltimate lc = new LightningChartUltimate();
+            RenderingSettings settings = new RenderingSettings();
+            settings.DeviceType = RendererDeviceType.AutoPreferD11;
+            LightningChartUltimate lc = new LightningChartUltimate(settings);
             lc.Parent = parent;
             lc.Dock = DockStyle.Fill;
             lc.Visible = true;
